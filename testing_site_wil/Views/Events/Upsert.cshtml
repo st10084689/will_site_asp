@@ -1,0 +1,92 @@
+﻿@model testing_site_wil.Models.Event
+
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-4 row">
+                <div class="row pb-2">
+                    <h2 class="text-primary">
+                        @(Model.ID == 0 ? "Create" : "Update") Event
+                    </h2>
+                    <hr />
+                </div>
+                <div class="mb-3">
+
+                    <input asp-for="ID" hidden />
+                    <input asp-for="Images" hidden />
+                   
+                   
+
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Title">
+                    </label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-bg-danger"></span>
+                </div>
+                @*<div class="mb-3">
+                <label asp-for="product.ProductDescription">
+                </label>
+                <textarea asp-for="product.ProductDescription" rows="3" class="form-control"></textarea>
+                <span asp-validation-for="product.ProductDescription" class="text-bg-danger"></span>
+                </div>*@
+                <div class="form-group mb-3">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" />
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="EventTime"></label>
+                    <input asp-for="EventTime" type="datetime-local" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Images"></label>
+                    <input type="file" id="uploadBox" name="file" class="form-control" />
+                </div>
+
+                @if (Model.ID != 0)
+                {
+                    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+                }
+                else
+                {
+                    <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                }
+                <a asp-controller="Events" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <img src="@Model.Images"
+                 width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        //client side validations
+    }
+  
+    <script>
+         function ValidateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please upload an Image!',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+}

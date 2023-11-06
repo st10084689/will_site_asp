@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_Notification" />
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Shopping List
+            </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Shopping" asp-action="Upsert" class="btn btn-primary">
+                <i class="bi bi-plus-circle-fill">&nbsp</i>Create New Product
+            </a>
+            <br />
+        </div>
+    </div>
+
+
+
+    <table id="shoppingData" class="table table-bordered table-stripped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Images</th>
+                <th> </th>
+          
+            </tr>
+
+        </thead>
+    </table>
+</div>
+@section Scripts{
+    <script src="~/js/Shopping.js"></script>
+}
